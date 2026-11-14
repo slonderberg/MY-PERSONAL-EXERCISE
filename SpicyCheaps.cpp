@@ -187,47 +187,90 @@ void Game(int row, int col, int QuantityOfBombs, int QuantityOfHearts, int Quant
     sleep(1);
     space(3);
 
-    cout << "INSERISCI LE CORDINATE DELLE TUE " << QuantityOfBombs << " PATATINE SPICY";
     bool exitBombs = false;
     while (!exitBombs)
     {
-        int choiseBombs;
-        for (int i = 0; i < QuantityOfBombs;)
+        bool exit_Bombs_Beta = false;
+        while (!exit_Bombs_Beta)
         {
-            cout << "PATATINA PICANTE N " << i + 1 << endl;
-            do
+            int choise_alpha;
+            cout << "MODALITA DELL' INSERIMENTO" << endl
+                 << "1. MANUALE" << endl
+                 << "2. AUTOMATICO" << endl
+                 << "RISPOSTA: ";
+            cin >> choise_alpha;
+            switch (choise_alpha)
             {
-                cout << "LA RIGA: ";
-                cin >> cordinateBombsRow[i];
-                if (cordinateBombsRow[i] <= 0 || cordinateBombsRow[i] > row)
-                {
-                    errore();
-                }
-            } while (cordinateBombsRow[i] <= 0 || cordinateBombsRow[i] > row);
-            do
-            {
-                cout << "LA COLONNA: ";
-                cin >> cordinateBombsCol[i];
-                if (cordinateBombsCol[i] <= 0 || cordinateBombsCol[i] > col)
-                {
-                    errore();
-                }
-            } while (cordinateBombsCol[i] <= 0 || cordinateBombsCol[i] > col);
+            case 1:
+                space(1);
+                cout << "INSERISCI LE CORDINATE DELLE TUE " << QuantityOfBombs << " PATATINE SPICY";
 
-            bool sameCordinate = false;
-            for (int j = 0; j < i; j++)
-            {
-                if (cordinateBombsRow[i] == cordinateBombsRow[j] && cordinateBombsCol[i] == cordinateBombsCol[j])
+                for (int i = 0; i < QuantityOfBombs;)
                 {
-                    cout << "QUESTA PATATINA E' STATA GIA MINATA, RIINSERISCI LA COORDINATA" << endl;
-                    sameCordinate = true;
+                    cout << "PATATINA PICANTE N " << i + 1 << endl;
+                    do
+                    {
+                        cout << "LA RIGA: ";
+                        cin >> cordinateBombsRow[i];
+                        if (cordinateBombsRow[i] <= 0 || cordinateBombsRow[i] > row)
+                        {
+                            errore();
+                        }
+                    } while (cordinateBombsRow[i] <= 0 || cordinateBombsRow[i] > row);
+                    do
+                    {
+                        cout << "LA COLONNA: ";
+                        cin >> cordinateBombsCol[i];
+                        if (cordinateBombsCol[i] <= 0 || cordinateBombsCol[i] > col)
+                        {
+                            errore();
+                        }
+                    } while (cordinateBombsCol[i] <= 0 || cordinateBombsCol[i] > col);
+
+                    bool sameCordinate = false;
+                    for (int j = 0; j < i; j++)
+                    {
+                        if (cordinateBombsRow[i] == cordinateBombsRow[j] && cordinateBombsCol[i] == cordinateBombsCol[j])
+                        {
+                            cout << "QUESTA PATATINA E' STATA GIA MINATA, RIINSERISCI LA COORDINATA" << endl;
+                            sameCordinate = true;
+                        }
+                    }
+                    if (!sameCordinate)
+                    {
+                        i++;
+                    }
                 }
-            }
-            if (!sameCordinate)
-            {
-                i++;
+                exit_Bombs_Beta = true;
+                break;
+            case 2:
+                for (int i = 0; i < QuantityOfBombs;)
+                {
+
+                    cordinateBombsRow[i] = rand() % row + 1;
+                    cordinateBombsCol[i] = rand() % col + 1;
+                    bool sameCordinate = false;
+                    for (int j = 0; j < i && !sameCordinate; j++)
+                    {
+                        if (cordinateBombsRow[i] == cordinateBombsRow[j] && cordinateBombsCol[i] == cordinateBombsCol[j])
+                        {
+                            sameCordinate = true;
+                        }
+                    }
+                    if (!sameCordinate)
+                    {
+                        i++;
+                    }
+                }
+                exit_Bombs_Beta = true;
+                break;
+
+            default:
+                errore();
+                break;
             }
         }
+
         char bombs = '*';
 
         for (int i = 0; i < QuantityOfBombs; i++)
@@ -277,31 +320,37 @@ void Game(int row, int col, int QuantityOfBombs, int QuantityOfHearts, int Quant
             }
             cout << endl;
         }
-        cout << "VUOI RIINSERIRE LE BOMBE?" << endl
-             << "1. SI" << endl
-             << "2. NO" << endl
-             << "RISPOSTA: ";
-        cin >> choiseBombs;
-        switch (choiseBombs)
+        bool exit_Bombs_Remake = false;
+        while (!exit_Bombs_Remake)
         {
-        case 1:
-            for (int i = 0; i < row; i++)
+            int choiseBombs;
+            cout << "VUOI RIINSERIRE LE BOMBE?" << endl
+                 << "1. SI" << endl
+                 << "2. NO" << endl
+                 << "RISPOSTA: ";
+            cin >> choiseBombs;
+            switch (choiseBombs)
             {
-                for (int j = 0; j < col; j++)
+            case 1:
+                for (int i = 0; i < row; i++)
                 {
-                    CheapsOfPlayer1[i][j] = cheaps;
+                    for (int j = 0; j < col; j++)
+                    {
+                        CheapsOfPlayer1[i][j] = cheaps;
+                    }
                 }
+                exit_Bombs_Remake = true;
+                break;
+
+            case 2:
+                exitBombs = true;
+                exit_Bombs_Remake = true;
+                break;
+
+            default:
+                errore();
+                break;
             }
-
-            break;
-
-        case 2:
-            exitBombs = true;
-            break;
-
-        default:
-            errore();
-            break;
         }
     }
 
@@ -683,20 +732,24 @@ int main()
                  << "SUL TAVOLO CI SONO LE PATATINE DIVISI IN DUE PARTI UGUALI CON LA  " << endl
                  << "QUANTITA PURE UGUALE. AL INIZIO DEL GIOCO DEVI SCEGLERE LE PATATINE " << endl
                  << "QUALI VUOI MINARE CON LA SALSA EXTRA HOT DALLA PARTE DEL TUO AVERSARIO. " << endl
-                 << "NEL CAMPO, SOTTO UNA PATATINA SCONOSCIUTA, PUOI TROVARE LA PATATINA GOLD" << endl 
+                 << "NEL CAMPO, SOTTO UNA PATATINA SCONOSCIUTA, PUOI TROVARE LA PATATINA GOLD" << endl
                  << "CHE TI PUO DARE UNA VITA IN PIU. PERDE CHI SPRECCA PRIMA I TUTTI SUOI CUORI.";
-            cout << endl << endl;
+            cout << endl
+                 << endl;
             sleep(1);
             cout << "======================I LIVELLI DELLA DIFICOLTA======================" << endl
-                 << "1. FACILE:" << endl 
+                 << "1. FACILE:" << endl
                  << "CI SONO 9 PATATINE IN TOTALE DI QUALI 3 SONO BOMBE, OGNIUNO HA 3 CUORI " << endl
-                 << "E NON E' PRESENTE LA PATATINA GOLD IN QUESTA MODALITA'" << endl << endl
+                 << "E NON E' PRESENTE LA PATATINA GOLD IN QUESTA MODALITA'" << endl
+                 << endl
                  << "2. COMPLICATO" << endl
                  << "CI SONO 36 PATATINE IN TOTALE DI QUALI 11 SONO BOMBE, OGNIUNO HA 3 CUORI" << endl
-                 << "ED E' PRESENTE LA PATATINA GOLD IN QUESTA MODALITA'" << endl << endl
-                 << "3. DIFICILE" << endl 
+                 << "ED E' PRESENTE LA PATATINA GOLD IN QUESTA MODALITA'" << endl
+                 << endl
+                 << "3. DIFICILE" << endl
                  << "CI SONO 81 PATATINE IN TOTALE DI QUALI 23 SONO BOMBE, OGNIUNO HA 3 CUORI" << endl
-                 << "ED E' PRESENTE LA PATATINA GOLD IN QUESTA MODALITA'" << endl << endl
+                 << "ED E' PRESENTE LA PATATINA GOLD IN QUESTA MODALITA'" << endl
+                 << endl
                  << "4. IMPOSSIBILE" << endl
                  << "CI SONO 81 PATATINE IN TOTALE DI QUALI 25 SONO BOMBE, IL GIOCATORE HA 1 " << endl
                  << "SOLO CUORE E AVERSARIO NE HA 5 ED E' PRESENTE LA PATATINA GOLD IN " << endl
