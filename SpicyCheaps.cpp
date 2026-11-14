@@ -648,7 +648,7 @@ int main()
                      << "1. FACILE" << endl
                      << "2. COMPLICATO" << endl
                      << "3. DIFFICILE" << endl
-                     << "4. IMPOSIBILE" << endl
+                     << "4. IMPOSSIBILE" << endl
                      << "RISPOSTA: ";
                 cin >> choiseCase1;
                 space(3);
@@ -683,8 +683,26 @@ int main()
                  << "SUL TAVOLO CI SONO LE PATATINE DIVISI IN DUE PARTI UGUALI CON LA  " << endl
                  << "QUANTITA PURE UGUALE. AL INIZIO DEL GIOCO DEVI SCEGLERE LE PATATINE " << endl
                  << "QUALI VUOI MINARE CON LA SALSA EXTRA HOT DALLA PARTE DEL TUO AVERSARIO. " << endl
-                 << "PERDE CHI SPRECCA PRIMA I TUTTI SUOI CUORI";
-            cout << endl;
+                 << "NEL CAMPO, SOTTO UNA PATATINA SCONOSCIUTA, PUOI TROVARE LA PATATINA GOLD" << endl 
+                 << "CHE TI PUO DARE UNA VITA IN PIU. PERDE CHI SPRECCA PRIMA I TUTTI SUOI CUORI.";
+            cout << endl << endl;
+            sleep(1);
+            cout << "======================I LIVELLI DELLA DIFICOLTA======================" << endl
+                 << "1. FACILE:" << endl 
+                 << "CI SONO 9 PATATINE IN TOTALE DI QUALI 3 SONO BOMBE, OGNIUNO HA 3 CUORI " << endl
+                 << "E NON E' PRESENTE LA PATATINA GOLD IN QUESTA MODALITA'" << endl << endl
+                 << "2. COMPLICATO" << endl
+                 << "CI SONO 36 PATATINE IN TOTALE DI QUALI 11 SONO BOMBE, OGNIUNO HA 3 CUORI" << endl
+                 << "ED E' PRESENTE LA PATATINA GOLD IN QUESTA MODALITA'" << endl << endl
+                 << "3. DIFICILE" << endl 
+                 << "CI SONO 81 PATATINE IN TOTALE DI QUALI 23 SONO BOMBE, OGNIUNO HA 3 CUORI" << endl
+                 << "ED E' PRESENTE LA PATATINA GOLD IN QUESTA MODALITA'" << endl << endl
+                 << "4. IMPOSSIBILE" << endl
+                 << "CI SONO 81 PATATINE IN TOTALE DI QUALI 25 SONO BOMBE, IL GIOCATORE HA 1 " << endl
+                 << "SOLO CUORE E AVERSARIO NE HA 5 ED E' PRESENTE LA PATATINA GOLD IN " << endl
+                 << "QUESTA MODALITA'" << endl
+                 << endl;
+            sleep(1);
             cout << "=========================I SIMBOLI DEL GIOCO=========================" << endl
                  << "O ----> LA PATATINA" << endl
                  << "* ----> LA PATATINA MINATA" << endl
